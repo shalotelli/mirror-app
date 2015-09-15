@@ -1,4 +1,4 @@
-(function (moment) {
+(function (moment, Firebase) {
   'use strict';
 
   angular.module('mirror-app.controllers', []);
@@ -9,6 +9,8 @@
 
   angular.module('mirror-app', [
     'ionic',
+    'firebase',
+
     'mirror-app.controllers',
     'mirror-app.services',
     'mirror-app.filters',
@@ -43,5 +45,20 @@
       });
   })
 
-  .constant('moment', moment);
-})(moment);
+  .constant('moment', moment)
+  .constant('Firebase', Firebase)
+
+  .constant('RegisteredComponents', [
+    {
+      name: 'Day Date',
+      key: 'day-date'
+    },
+
+    {
+      name: 'Short Time',
+      key: 'short-time'
+    }
+  ])
+
+  .constant('FirebaseUrl', 'https://mirror-app.firebaseio.com/');
+})(moment, Firebase);
