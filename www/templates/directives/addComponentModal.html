@@ -1,0 +1,14 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Component</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">close</button>
+  </ion-header-bar>
+
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="component in registeredComponents track by component.key" ng-click="addComponent(component)">
+        {{component.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>

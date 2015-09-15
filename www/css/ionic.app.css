@@ -15,6 +15,8 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+/* The path for our ionicons font files, relative to the built CSS in www/css */
+/* Include all of Ionic */
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -2563,7 +2565,7 @@ body, .ionic-body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  color: #fff;
+  color: #000;
   word-wrap: break-word;
   font-size: 14px;
   font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
@@ -2794,7 +2796,7 @@ cite {
   text-align: center; }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  color: #fff;
+  color: #000;
   font-weight: 500;
   font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   line-height: 1.2; }
@@ -7700,6 +7702,7 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+/* Import component styles */
 .day-date {
   font-size: 3em;
   line-height: 1.1em; }
@@ -7708,6 +7711,39 @@ a.button {
   font-size: 8em;
   line-height: 1em; }
 
+/* dashboard */
 .dashboard {
+  color: #fff;
   text-align: right;
   font-weight: 100; }
+
+/* add component button */
+.add-component-button {
+  position: absolute;
+  right: 0; }
+
+/* editable component */
+.editable-component {
+  position: relative; }
+  .editable-component.wiggle {
+    -webkit-animation-name: wiggle;
+    -webkit-animation-duration: .2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease; }
+  .editable-component .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 20px;
+    padding: 0 11px; }
+
+/* wiggle animation */
+@-webkit-keyframes wiggle {
+  from {
+    -webkit-transform: rotateZ(0.5deg); }
+
+  50% {
+    -webkit-transform: rotateZ(-0.5deg); }
+
+  to {
+    -webkit-transform: rotateZ(0.5deg); } }

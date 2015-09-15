@@ -16,19 +16,61 @@ $dark:                            #444 !default;
 */
 
 $base-background-color: #000;
-$base-color: #fff;
 
-// The path for our ionicons font files, relative to the built CSS in www/css
+/* The path for our ionicons font files, relative to the built CSS in www/css */
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
-// Include all of Ionic
+/* Include all of Ionic */
 @import "www/lib/ionic/scss/ionic";
 
-// Import component styles
+/* Import component styles */
 @import "www/js/components/dayDate/dayDate";
 @import "www/js/components/shortTime/shortTime";
 
+/* dashboard */
 .dashboard {
+  color: $light;
   text-align: right;
   font-weight: 100;
+}
+
+/* add component button */
+.add-component-button {
+  position: absolute;
+  right: 0;
+}
+
+/* editable component */
+.editable-component {
+  position: relative;
+
+  &.wiggle {
+    -webkit-animation-name: wiggle;
+    -webkit-animation-duration: .2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease;
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 20px;
+    padding: 0 11px;
+  }
+}
+
+/* wiggle animation */
+@-webkit-keyframes wiggle {
+  from {
+    -webkit-transform: rotateZ(0.5deg);
+  }
+
+  50% {
+    -webkit-transform: rotateZ(-0.5deg);
+  }
+  
+  to {
+    -webkit-transform: rotateZ(0.5deg);
+  }
 }
