@@ -5,6 +5,8 @@
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
   "dependencies": {
+    "angularfire": "~1.1.2",
+    "firebase": "~2.2.9",
     "jquery": "~2.1.4",
     "moment": "~2.10.6"
   }
