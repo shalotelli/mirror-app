@@ -3,39 +3,32 @@
 
   angular.module('mirror-app.services').service('DashboardComponents', DashboardComponents);
 
-  function DashboardComponents ($compile) {
-    this.components = [];
+  function DashboardComponents ($compile, $firebaseArray, Firebase, FirebaseUrl) {
+    var components,
+        firebase,
+        _editMode = false;
 
-    this.add = add;
-    this.remove = remove;
-    this.reset = reset;
-    this.compile = compile;
+    components = new Firebase(FirebaseUrl + 'dashboardcomponents');
 
-    function add (component) {
-      if (angular.isArray(component)) {
-        this.components.push.apply(this.components, component);
-      } else {
-        this.components.push(component);
-      }
-    }
-
-    function remove (component) {
-      var foundComponent = this.components.indexOf(component);
-
-      if (~foundComponent) {
-        this.components.splice(foundComponent, 1);
-      }
-
-      return component;
-    }
-
-    function reset () {
-      this.components.length = 0;
-    }
+    firebase = $firebaseArray.$extend({
+      $compile: compile,
+      toggleEditMode: toggleEditMode,
+      inEditMode: inEditMode
+    });
 
     function compile (component, scope) {
-      var componentTag = '<' + component + '></' + component + '>';
+      var componentTag = '<' + component.component + ' component-id="' + component.$id + '"></' + component.component + '>';
       return $compile(componentTag)(scope || true);
     }
+
+    function toggleEditMode () {
+      _editMode =! _editMode;
+    }
+
+    function inEditMode () {
+      return _editMode;
+    }
+
+    return firebase(components);
   }
 })();
