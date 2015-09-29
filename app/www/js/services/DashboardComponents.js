@@ -8,6 +8,7 @@
         _editMode = false;
 
     this.url = '/dashboard';
+    this.components = [];
 
     this.get = getComponent;
     this.post = postComponent;
@@ -15,6 +16,7 @@
     this.compile = compile;
     this.toggleEditMode = toggleEditMode;
     this.inEditMode = inEditMode;
+    this.setComponents = setComponents;
 
     function getComponent (success, error) {
       $sails.get(self.url).then(success, error);
@@ -40,6 +42,11 @@
 
     function inEditMode () {
       return _editMode;
+    }
+
+    function setComponents (components) {
+      self.components.length = 0;
+      self.components.push.apply(self.components, components);
     }
   }
 })();

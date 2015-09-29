@@ -7,17 +7,17 @@
     var addComponentDirective = {
       restrict: 'E',
       replace: true,
-      template: '<button class="button button-large button-positive add-component-button" ng-show="inEditMode()" ng-click="openAddComponentModal()">+</button>',
+      template: '<button class="button button-large button-positive add-component-button" ng-show="showAddButton()" ng-click="openAddComponentModal()">+</button>',
       controller: addComponentController,
       link: addComponentLink
     };
 
     function addComponentController ($scope, $element, $attrs) {
       $scope.registeredComponents = RegisteredComponents;
-      $scope.inEditMode = DashboardComponents.inEditMode;
 
       $scope.openAddComponentModal = openAddComponentModal;
       $scope.addComponent = addComponent;
+      $scope.showAddButton = showAddButton;
 
       $ionicModal.fromTemplateUrl('templates/directives/addComponentModal.html', {
         scope: $scope,
@@ -45,6 +45,10 @@
         function _onComponentAddError (error) {
           $log.error(error);
         }
+      }
+
+      function showAddButton () {
+        return DashboardComponents.inEditMode() || !DashboardComponents.components.length;
       }
     }
 

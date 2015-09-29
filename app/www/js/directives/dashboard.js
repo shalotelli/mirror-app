@@ -30,7 +30,9 @@
       function _loadComponents (response) {
         var components = [];
 
-        angular.forEach(response.data, function (component) {
+        DashboardComponents.setComponents(response.data);
+
+        angular.forEach(DashboardComponents.components, function (component) {
           components.push(DashboardComponents.compile(component, scope));
         });
 
