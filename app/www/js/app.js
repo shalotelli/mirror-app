@@ -1,4 +1,4 @@
-(function (moment, Firebase) {
+(function (moment, _) {
   'use strict';
 
   angular.module('mirror-app.controllers', []);
@@ -9,7 +9,7 @@
 
   angular.module('mirror-app', [
     'ionic',
-    'firebase',
+    'ngSails',
 
     'mirror-app.controllers',
     'mirror-app.services',
@@ -36,17 +36,22 @@
     TickService.start();
   })
 
-  .config(function ($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('app', {
-        url: '',
-        templateUrl: 'templates/app.html',
-        controller: 'DashboardController'
-      });
+  .config(function ($stateProvider, $urlRouterProvider, $sailsProvider, ApiUrl) {
+    $stateProvider.state('app', {
+      url: '',
+      templateUrl: 'templates/app.html',
+      controller: 'DashboardController',
+      controllerAs: 'DashboardVm'
+    });
+
+
+    // set sails url
+    $sailsProvider.url = ApiUrl;
   })
 
   .constant('moment', moment)
-  .constant('Firebase', Firebase)
+
+  .constant('_', _)
 
   .constant('RegisteredComponents', [
     {
@@ -60,5 +65,5 @@
     }
   ])
 
-  .constant('FirebaseUrl', 'https://mirror-app.firebaseio.com/');
-})(moment, Firebase);
+  .constant('ApiUrl', 'http://localhost:1337');
+})(moment, _);

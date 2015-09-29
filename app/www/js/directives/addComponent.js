@@ -31,12 +31,23 @@
       }
 
       function addComponent (component) {
-        DashboardComponents.$add({
+        var params = {
+          componentName: component.key
+        };
+
+        DashboardComponents.post(params, _onComponentAddSuccess, _onComponentAddError);
+
+        function _onComponentAddSuccess () {
+          $scope.modal.hide();
+        }
+
+        function _onComponentAddError () {}
+        /*DashboardComponents.$add({
           component: component.key
         }).then(function (ref) {
           $scope.modal.hide();
           $rootScope.$broadcast('update-components', ref.key());
-        });
+        });*/
       }
     }
 

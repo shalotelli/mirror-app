@@ -7,7 +7,6 @@
     var editableComponent = {
       restrict: 'A',
       transclude: true,
-      // replace: true,
       templateUrl: 'templates/directives/editableComponent.html',
       controller: editableComponentController,
       link: editableComponentLink
@@ -26,11 +25,15 @@
           return false;
         }
 
-        component = DashboardComponents.$getRecord($scope.componentId);
+        DashboardComponents.delete($scope.componentId, _onDeleteSuccess, _onDeleteError);
 
-        DashboardComponents.$remove(component).then(function (ref) {
+        function _onDeleteSuccess () {
           $rootScope.$broadcast('update-components', $scope.componentId);
-        });
+        }
+
+        function _onDeleteError (error) {
+          $log.error(error);
+        }
       }
     }
 
