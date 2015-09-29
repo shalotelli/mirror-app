@@ -3,7 +3,7 @@
 
   angular.module('mirror-app').directive('dashboard', dashboardFunc);
 
-  function dashboardFunc ($log, $rootScope, $ionicGesture, DashboardComponents) {
+  function dashboardFunc ($log, $rootScope, $ionicGesture, $sails, DashboardComponents) {
     var dashboard = {
       restrict: 'E',
       transclude: true,
@@ -13,8 +13,13 @@
     };
 
     function dashboardLink (scope, element, attrs) {
+      var dashboardComponentsUrl = DashboardComponents.url.replace('/', ''),
+          dashboardWatch = $sails.on(dashboardComponentsUrl, _onDashboardUpdate);
+
       // add components
       updateComponents();
+
+      scope.$on('$destroy', _destorySailsWatch);
 
       $rootScope.$on('update-components', updateComponents);
 
@@ -34,6 +39,14 @@
 
       function _onLoadError (response) {
         $log.error(response);
+      }
+
+      function _onDashboardUpdate (message) {
+        updateComponents();
+      }
+
+      function _destorySailsWatch () {
+        $sails.off(dashboardComponentsUrl, dashboardWatch);
       }
     }
 
