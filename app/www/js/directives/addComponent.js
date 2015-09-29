@@ -3,7 +3,7 @@
 
   angular.module('mirror-app.directives').directive('addComponent', addComponentFunc);
 
-  function addComponentFunc ($rootScope, $window, $ionicModal, DashboardComponents, RegisteredComponents) {
+  function addComponentFunc ($rootScope, $window, $log, $ionicModal, DashboardComponents, RegisteredComponents) {
     var addComponentDirective = {
       restrict: 'E',
       replace: true,
@@ -39,15 +39,12 @@
 
         function _onComponentAddSuccess () {
           $scope.modal.hide();
+          $rootScope.$broadcast('update-components');
         }
 
-        function _onComponentAddError () {}
-        /*DashboardComponents.$add({
-          component: component.key
-        }).then(function (ref) {
-          $scope.modal.hide();
-          $rootScope.$broadcast('update-components', ref.key());
-        });*/
+        function _onComponentAddError (error) {
+          $log.error(error);
+        }
       }
     }
 
